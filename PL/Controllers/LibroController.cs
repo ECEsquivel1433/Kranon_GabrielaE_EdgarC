@@ -69,144 +69,137 @@ namespace PL.Controllers
             }
             return View(libro);
         }
-        //[HttpGet]
-        //public ActionResult Form(int? idMateria)
-        //{
-        //    //ML.Result result = new ML.Result();
-        //    ML.Materia materia = new ML.Materia();
+        [HttpGet]
+        public ActionResult Form(int? idLibro)
+        {
+            ML.Result result = new ML.Result();
+            ML.Libro materia = new ML.Libro();
 
 
-        //    if (idMateria == null)
-        //    {
+            if (idLibro == null)
+            {
 
-        //        return View(materia);
-        //    }
+                return View(materia);
+            }
 
-        //    else
-        //    {
+            else
+            {
 
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri("http://localhost:61306/api/");
+                //using (var client = new HttpClient())
+                //{
+                //    client.BaseAddress = new Uri("http://localhost:61306/api/");
 
-        //            var responseTask = client.GetAsync("Materia/GetById/" + idMateria);
-        //            responseTask.Wait();
-        //            var resultAPI = responseTask.Result;
-        //            if (resultAPI.IsSuccessStatusCode)
-        //            {
-        //                var readTask = resultAPI.Content.ReadAsAsync<ML.Result>();
-        //                readTask.Wait();
-        //                ML.Materia resultItemList = new ML.Materia();
-        //                resultItemList = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Materia>(readTask.Result.Object.ToString());
-        //                materia = resultItemList;
-
-
-        //            }
-
-        //        }
-        //        return View(materia);
-        //        if (materia != null)
-        //        {
-        //            return View();
-
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = "Ocurrio un error al hacer la consulta del alumno ";
-        //            return View("Modal");
-        //        }
+                //    var responseTask = client.GetAsync("Materia/GetById/" + idLibro);
+                //    responseTask.Wait();
+                //    var resultAPI = responseTask.Result;
+                //    if (resultAPI.IsSuccessStatusCode)
+                //    {
+                //        var readTask = resultAPI.Content.ReadAsAsync<ML.Result>();
+                //        readTask.Wait();
+                //        ML.Materia resultItemList = new ML.Materia();
+                //        resultItemList = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Materia>(readTask.Result.Object.ToString());
+                //        materia = resultItemList;
 
 
-        //        //hola
+                //    }
 
-        //        //ML.Result result = BL.Aseguradora.GetById(idAseguradora.Value);
-        //        //aseguradora.Usuario = new ML.Usuario();
-        //        //aseguradora.Usuario.Usuarios = resultUsuario.Objects;
-        //        //ML.Result result11 = BL.Aseguradora.GetById(idAseguradora.Value);
+                }
+                return View(materia);
+                if (materia != null)
+                {
+                    return View();
+
+                }
+                else
+                {
+                    ViewBag.Message = "Ocurrio un error al hacer la consulta del alumno ";
+                    return View("Modal");
+                }
 
 
 
-        //        //if (result.Correct)
-        //        //{
+
+                if (result.Correct)
+                {
 
 
-        //        //    ML.Aseguradora ase = (ML.Aseguradora)result.Object;
-        //        //    ase.Usuario.Usuarios = resultUsuario.Objects;
-        //        //    return View(ase);
+                    ML.Libro ase = (ML.Libro)result.Object;
+                    ase.Libro.Libros = resultLibros.Objects;
+                    return View(ase);
 
-        //        //}
-        //        //else
-        //        //{
-        //        //    ViewBag.Message = "Ocurrio un error al hacer la consulta de la aseguradora " + result.ErrorMessage;
-        //        //    return View("Modal");
-        //        //}
+                }
+                else
+                {
+                    ViewBag.Message = "Ocurrio un error al hacer la consulta de la aseguradora " + result.ErrorMessage;
+                    return View("Modal");
+                }
 
 
-        //    }
+            }
 
-        //}
+        }
 
-        //[HttpPost]
-        //public ActionResult Form(ML.Materia aseguradora)
-        //{
+        [HttpPost]
+        public ActionResult Form(ML.Libro Libro)
+        {
 
-        //    ML.Result result = new ML.Result();
-        //    if (aseguradora.IdMateria == 0)
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri("http://localhost:61306/api/");
+            ML.Result result = new ML.Result();
+            if (Libro.IdLibro == 0)
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri("http://localhost:61306/api/");
 
-        //            //HTTP POST
-        //            var postTask = client.PostAsJsonAsync<ML.Materia>("Materia/Add", aseguradora);
-        //            postTask.Wait();
+                    //HTTP POST
+                    var postTask = client.PostAsJsonAsync<ML.Libro>("Materia/Add", Libro);
+                    postTask.Wait();
 
-        //            var resulAseguradora = postTask.Result;
+                    var resulLibro = postTask.Result;
 
-        //            if (resulAseguradora.IsSuccessStatusCode)
-        //            {
-        //                ViewBag.Mensaje = "Se ha insertado la aseguradora";
-        //                return PartialView("Modal");
-        //            }
-        //            else
-        //            {
-        //                ViewBag.Mensaje = "No ha insertado la aseguradora";
-        //                return PartialView("Modal");
-        //            }
-        //        }
-        //        return View("GetAll");
-        //        //result = BL.Aseguradora.Add(aseguradora);
-        //        //if (result.Correct)
-        //        //{
-        //        //    ViewBag.Mensaje = "Se ha insertado la aseguradora";
-        //        //}
-        //        //else
-        //        //{
-        //        //    ViewBag.Mensaje = "Ne ha insertado la aseguradora" + result.ErrorMessage;
-        //        //}
-        //    }
-        //    else
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.BaseAddress = new Uri("http://localhost:61306/api/");
+                    if (resulLibro.IsSuccessStatusCode)
+                    {
+                        ViewBag.Mensaje = "Se ha insertado la aseguradora";
+                        return PartialView("Modal");
+                    }
+                    else
+                    {
+                        ViewBag.Mensaje = "No ha insertado la aseguradora";
+                        return PartialView("Modal");
+                    }
+                }
+                return View("GetAll");
+                //result = BL.Aseguradora.Add(aseguradora);
+                //if (result.Correct)
+                //{
+                //    ViewBag.Mensaje = "Se ha insertado la aseguradora";
+                //}
+                //else
+                //{
+                //    ViewBag.Mensaje = "Ne ha insertado la aseguradora" + result.ErrorMessage;
+                //}
+            }
+            else
+            {
+                //using (var client = new HttpClient())
+                //{
+                //    client.BaseAddress = new Uri("http://localhost:61306/api/");
 
-        //            //HTTP POST
-        //            var postTask = client.PutAsJsonAsync<ML.Materia>("Materia/Update/" + aseguradora.IdMateria, aseguradora);
-        //            postTask.Wait();
+                //    //HTTP POST
+                //    var postTask = client.PutAsJsonAsync<ML.Materia>("Materia/Update/" + Libro.IdMateria, Libro);
+                //    postTask.Wait();
 
-        //            var resultAlumno = postTask.Result;
-        //            if (resultAlumno.IsSuccessStatusCode)
-        //            {
-        //                ViewBag.Mensaje = "Se ha actualizado el Aseguradora";
-        //                return PartialView("Modal");
-        //            }
-        //        }
-        //        return PartialView("Modal");
-        //    }
+                //    var resultAlumno = postTask.Result;
+                //    if (resultAlumno.IsSuccessStatusCode)
+                //    {
+                //        ViewBag.Mensaje = "Se ha actualizado el Aseguradora";
+                //        return PartialView("Modal");
+                //    }
+                //}
+                return PartialView("Modal");
+            }
 
-        //    return View();
-        //}
+            return View();
+        }
         //[HttpPost]//servicio web
         //public ActionResult Delete(ML.Materia materia)
         //{
