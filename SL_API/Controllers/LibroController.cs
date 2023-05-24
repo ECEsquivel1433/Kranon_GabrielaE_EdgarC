@@ -12,8 +12,8 @@ namespace SL_API.Controllers
         [Route("api/Libro/GetAll")]
         public IActionResult GetAll()
         {
-            ML.Result result = BL.Libro.GetAll();
-
+            // ML.Result1 result = BL.Libro.GetAll();
+            ML.Result1 result = new ML.Result1();   
             if (result.Correct)
             {
                 return Ok(result);
@@ -27,8 +27,8 @@ namespace SL_API.Controllers
         [Route("api/Libro/LibroGetAllFecha")]
         public IActionResult LibroGetAllFechal()
         {
-            ML.Result result = BL.Libro.LibroGetAllFecha();
-
+            //ML.Result1 result = BL.Libro.LibroGetAllFecha();
+            ML.Result1 result = new ML.Result1();
             if (result.Correct)
             {
                 return Ok(result);
@@ -42,8 +42,8 @@ namespace SL_API.Controllers
         [Route("api/Libro/Add")]
         public IActionResult Add([FromBody] ML.Libro libro)
         {
-            ML.Result result = BL.Libro.Add(libro);
-
+            //ML.Result1 result = BL.Libro.Add(libro);
+            ML.Result1 result = new ML.Result1();
             if (result.Correct)
             {
                 return Ok(result);
@@ -58,8 +58,8 @@ namespace SL_API.Controllers
         public IActionResult DeleteAutor([FromBody] byte libro)
         {
 
-            ML.Result result = BL.Libro.DeleteByAutor(libro);
-
+            //ML.Result1 result = BL.Libro.DeleteByAutor(libro);
+            ML.Result1 result = new ML.Result1();
             if (result.Correct)
             {
                 return Ok(result);
@@ -74,8 +74,8 @@ namespace SL_API.Controllers
         public IActionResult DeleteByEditorial([FromBody] byte libro)
         {
 
-            ML.Result result = BL.Libro.DeleteByEditorial(libro);
-
+            //ML.Result1 result = BL.Libro.DeleteByEditorial(libro);
+            ML.Result1 result = new ML.Result1();
             if (result.Correct)
             {
                 return Ok(result);

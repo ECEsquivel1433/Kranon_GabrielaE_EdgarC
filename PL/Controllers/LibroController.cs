@@ -12,7 +12,7 @@ namespace PL.Controllers
         public ActionResult GetAll()
         {
             ML.Libro libro = new ML.Libro();
-            ML.Result resultLibro = new ML.Result();
+            ML.Result1 resultLibro = new ML.Result1();
             resultLibro.Objects = new List<object>();
 
             using (var client = new HttpClient())
@@ -26,7 +26,7 @@ namespace PL.Controllers
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<ML.Result>();
+                    var readTask = result.Content.ReadAsAsync<ML.Result1>();
                     readTask.Wait();
 
                     foreach (var resultItem in readTask.Result.Objects)
@@ -42,7 +42,7 @@ namespace PL.Controllers
         public ActionResult LibroGetAllFecha()
         {
             ML.Libro libro = new ML.Libro();
-            ML.Result resultLibro = new ML.Result();
+            ML.Result1 resultLibro = new ML.Result1();
             resultLibro.Objects = new List<object>();
 
             using (var client = new HttpClient())
@@ -56,7 +56,7 @@ namespace PL.Controllers
 
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<ML.Result>();
+                    var readTask = result.Content.ReadAsAsync<ML.Result1>();
                     readTask.Wait();
 
                     foreach (var resultItem in readTask.Result.Objects)
@@ -72,9 +72,10 @@ namespace PL.Controllers
         [HttpGet]
         public ActionResult Form(int? idLibro)
         {
-            ML.Result result = new ML.Result();
+            ML.Result1 result = new ML.Result1();
             ML.Libro materia = new ML.Libro();
-
+            ML.Result1 resultLibro = new ML.Result1();
+            resultLibro.Objects = new List<object>();
 
             if (idLibro == null)
             {
@@ -103,47 +104,44 @@ namespace PL.Controllers
 
                 //    }
 
-                }
-                return View(materia);
-                if (materia != null)
-                {
-                    return View();
-
-                }
-                else
-                {
-                    ViewBag.Message = "Ocurrio un error al hacer la consulta del alumno ";
-                    return View("Modal");
-                }
-
-
-
-
-                if (result.Correct)
-                {
-
-
-                    ML.Libro ase = (ML.Libro)result.Object;
-                    ase.Libro.Libros = resultLibros.Objects;
-                    return View(ase);
-
-                }
-                else
-                {
-                    ViewBag.Message = "Ocurrio un error al hacer la consulta de la aseguradora " + result.ErrorMessage;
-                    return View("Modal");
-                }
-
+            }
+            return View(materia);
+            if (materia != null)
+            {
+                return View();
 
             }
+            else
+            {
+                ViewBag.Message = "Ocurrio un error al hacer la consulta del alumno ";
+                return View("Modal");
+            }
+
+
+
+
+            if (result.Correct)
+            {
+
+
+                ML.Libro ase = (ML.Libro)result.Object;
+               // ase.Libros = resultLibros.Objects;
+                return View(ase);
+
+            }
+            else
+            {
+                ViewBag.Message = "Ocurrio un error al hacer la consulta de la aseguradora " + result.ErrorMessage;
+                return View("Modal");
+            }
+
 
         }
-
         [HttpPost]
         public ActionResult Form(ML.Libro Libro)
         {
 
-            ML.Result result = new ML.Result();
+            ML.Result1 result = new ML.Result1();
             if (Libro.IdLibro == 0)
             {
                 using (var client = new HttpClient())
@@ -200,39 +198,70 @@ namespace PL.Controllers
 
             return View();
         }
-    //[HttpPost]//servicio web
-    public ActionResult Delete(ML.Libro libro)
-    {
-        ML.Result resultLibro = new ML.Result();
-        int IdLibro = libro.IdLibro;
-        //int id = Aseguradora.IdAseguradora;
-        using (var client = new HttpClient())
-        {
-            client.BaseAddress = new Uri("http://localhost:61306/api");
 
-            //HTTP POST
-            var postTask = client.GetAsync("Materia/Delete/" + IdLibro);
-            postTask.Wait();
+        //[HttpDelete]
+        //public ActionResult DeleteByAutor(ML.Libro libro)
+        //{
+        //    ML.Result1 result = new ML.Result1();
+        //    int IdAutor = libro.IdAutor;
+        //    //int id = Aseguradora.IdAseguradora;
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri("http://localhost:61306/api");
 
-            var resultDelete = postTask.Result;
-            if (resultDelete.IsSuccessStatusCode)
-            {
-                ViewBag.Message = "Se Borro correctamente el Aseguradora";
+        //        //HTTP POST
+        //        var postTask = client.GetAsync("Libro/DeleteByAutor/" + IdAutor);
+        //        postTask.Wait();
 
-                //ML.Aseguradora Aseguradora = new ML.Producto();
+        //        var resultDelete = postTask.Result;
+        //        if (resultDelete.IsSuccessStatusCode)
+        //        {
+        //            ViewBag.Message = "Se Borro correctamente el Aseguradora";
 
-                //resultListAseguradora= BL.Aseguradora.GetAll(Aseguradora);
-                //return RedirectToAction("Modal");
-                return PartialView("Modal");
-            }
-            else
-            {
-                ViewBag.Message = "Nose Se Borro correctamente el Aseguradora";
 
-            }
-        }
+        //            return PartialView("Modal");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = "Nose Se Borro correctamente el Aseguradora";
 
-        
+        //        }
+        //    }
+        //    return View("Modal");
+
+        //}
+        //[HttpDelete]
+        //public ActionResult DeleteByEditorial(ML.Libro libro)
+        //{
+        //    ML.Result1 result = new ML.Result1();
+        //    int IdEditorial = libro.IdEditorial;
+        //    //int id = Aseguradora.IdAseguradora;
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri("http://localhost:61306/api");
+
+        //        //HTTP POST
+        //        var postTask = client.GetAsync("Libro/DeleteByEditorial/" + IdEditorial);
+        //        postTask.Wait();
+
+        //        var resultDelete = postTask.Result;
+        //        if (resultDelete.IsSuccessStatusCode)
+        //        {
+        //            ViewBag.Message = "Se Borro correctamente el Aseguradora";
+
+
+        //            return PartialView("Modal");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = "Nose Se Borro correctamente el Aseguradora";
+
+        //        }
+        //    }
+        //    return View("Modal");
+
+        //}
+
     }
 
 }
