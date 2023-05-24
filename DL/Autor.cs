@@ -13,7 +13,7 @@ public partial class Autor
 
     public string? ApellidoMaterno { get; set; }
 
-    public DateTime? FechaNacimiento { get; set; }
+    public string? FechaNacimiento { get; set; }
 
     public string? Direccion { get; set; }
 

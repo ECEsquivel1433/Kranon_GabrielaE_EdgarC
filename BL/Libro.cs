@@ -33,7 +33,7 @@ namespace BL
             {
                 using (DL.KranonGabrielaEEdgarCContext context = new DL.KranonGabrielaEEdgarCContext())
                 {
-                    var queryEF = context.Libros.FromSqlRaw($"UsuarioGetAll '{libro.Nombre}','{libro.Portada}','{libro.Publicacion}'").ToList();
+                    var queryEF = context.Libros.FromSqlRaw($"LibroGetAll '{libro.Autor.Nombre}','{libro.Portada}','{libro.Publicacion}', '{libro.Editorial.Nombre}'").ToList();
                     result.Objects = new List<object>();
                     if (queryEF != null)
                     {
@@ -44,7 +44,7 @@ namespace BL
                             libro.Editorial = new ML.Editorial();
 
                             libro.IdLibro = obj.IdLibro;
-                            libro.Nombre = obj.Titulo;
+                            
                             libro.Portada = obj.Portada;
                             libro.Descripcion = obj.Descripcion;
                             libro.Publicacion = obj.Publicacion;
@@ -85,7 +85,7 @@ namespace BL
                             libro.Editorial = new ML.Editorial();
 
                             libro.IdLibro = obj.IdLibro;
-                            libro.Nombre = obj.Titulo;
+                           
                             libro.Portada = obj.Portada;
                             libro.Descripcion = obj.Descripcion;
                             libro.Publicacion = obj.Publicacion;

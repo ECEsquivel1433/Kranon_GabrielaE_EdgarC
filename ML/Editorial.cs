@@ -10,6 +10,6 @@ namespace ML
     {
         public int IdEditorial { get; set; }
         public string Nombre { get; set; } = default!;
-        public List<object> Editoriales { get;} = default!;
+        public List<object> Editoriales { get; set; } = default!;
     }
 }
