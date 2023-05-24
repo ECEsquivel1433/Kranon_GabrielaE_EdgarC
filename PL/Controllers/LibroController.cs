@@ -42,6 +42,12 @@ namespace PL.Controllers
                     }
                 }
             }
+            ML.Result resultEditoriales = BL.Editorial.GetAll();
+            ML.Result resultAutores = BL.Autor.GetAll();
+
+            libro.Editorial.Editoriales = resultEditoriales.Objects;
+            libro.Autor.Autores = resultAutores.Objects;
+
             return View(libro);
         }
 
@@ -58,6 +64,11 @@ namespace PL.Controllers
             {
                 ViewBag.Message = "Ocurrio un error al consultar los libros";
             }
+            ML.Result resultEditoriales = BL.Editorial.GetAll();
+            ML.Result resultAutores = BL.Autor.GetAll();
+
+            libro.Editorial.Editoriales = resultEditoriales.Objects;
+            libro.Autor.Autores = resultAutores.Objects;
             return View(libro);
         }
 

@@ -12,24 +12,22 @@ namespace BL
         public static ML.Result GetAll()
         {
             ML.Result result = new ML.Result();
-            ML.Libro libro= new ML.Libro();
             try
             {
                 using (DL.KranonGabrielaEEdgarCContext context = new DL.KranonGabrielaEEdgarCContext())
                 {
-                    var queryEF = context.Libros.FromSqlRaw($"AutorGetAll").ToList();
+                    var queryEF = context.Autors.FromSqlRaw($"AutorGetAll").ToList();
                     result.Objects = new List<object>();
                     if (queryEF != null)
                     {
                         foreach (var obj in queryEF)
                         {
-                            libro = new ML.Libro();
-                            libro.Autor = new ML.Autor();
+                            ML.Autor autor = new ML.Autor();
 
-                            libro.Autor.IdAutor = obj.IdAutor;
-                            libro.Autor.Nombre = obj.Autor;
+                            autor.IdAutor = obj.IdAutor;
+                            autor.Nombre = obj.Nombre;
 
-                            result.Objects.Add(libro);
+                            result.Objects.Add(autor);
                         }
                         result.Correct = true;
                     }

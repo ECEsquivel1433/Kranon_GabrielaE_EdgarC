@@ -20,22 +20,17 @@
         </div>
     </section>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-12">
             @using (Html.BeginForm("GetAll", "Libro", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="row">
+                    
+
                     <div class="col-md-3">
-                        @Html.LabelFor(model => model.Autor)
+                        @Html.LabelFor(model => model.Portada)
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
-                            @Html.TextBoxFor(model => model.Autor, new { @class = "form-control", @id = "txtNombre" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        @Html.LabelFor(model => model.Nombre)
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
-                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
+                            @Html.TextBoxFor(model => model.Portada, new { @class = "form-control", @id = "txtNombre" })
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -46,11 +41,16 @@
                         </div>
                     </div>
                     <div class="col-md-3">
+                        @Html.LabelFor(model => model.Autor)
+                        @Html.DropDownListFor(model => model.Autor.Nombre, new SelectList(Model.Autor.Autores, "Nombre", "Nombre"), "Selecciona una opción", new { @class = "form-control", @id = "txtRol"  })
+                        @Html.ValidationMessageFor(model => model.Autor.IdAutor,null, new {@class ="text-danger"})
+                        @Html.Label(null, "", new{@id="lblRol"})
+                    </div>
+                    <div class="col-md-3">
                         @Html.LabelFor(model => model.Editorial)
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
-                            @Html.TextBoxFor(model => model.Editorial, new { @class = "form-control", @id = "txtNombre" })
-                        </div>
+                        @Html.DropDownListFor(model => model.Editorial.Nombre, new SelectList(Model.Editorial.Editoriales, "Nombre", "Nombre"), "Selecciona una opción", new { @class = "form-control", @id = "txtRol"  })
+                        @Html.ValidationMessageFor(model => model.Editorial.IdEditorial,null, new {@class ="text-danger"})
+                        @Html.Label(null, "", new{@id="lblRol"})
                     </div>
                 </div>
 
@@ -86,10 +86,10 @@
             <table class="table table-bordered table-responsive">
                 <thead class="thead-dark">
                     <tr>
-                        <td class="hidden">IdLibro</td>
+                        <td class="visually-hidden">IdLibro</td>
                         <td>Titulo</td>
-                        <td>Autor </td>
                         <td>Fecha Publicacion</td>
+                        <td>Autor </td>
                         <td>Editorial</td>
                     </tr>
                 </thead>
@@ -97,10 +97,10 @@
                     @foreach (ML.Libro libro in Model.Libros)
                     {
                         <tr>
-                            <td class="hidden">@libro.IdLibro</td>
+                            <td class="visually-hidden">@libro.IdLibro</td>
                             <td>@libro.Portada</td>
-                            <td>@libro.Autor.Nombre</td>
                             <td>@libro.Publicacion</td>
+                            <td>@libro.Autor.Nombre</td>
                             <td>@libro.Editorial.Nombre</td>
                         </tr>
                     }
