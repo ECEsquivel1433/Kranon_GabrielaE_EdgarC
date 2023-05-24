@@ -17,7 +17,7 @@ namespace PL.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:61306/api/");
+                client.BaseAddress = new Uri("http://localhost:5207/api/");
 
                 var responseTask = client.GetAsync("Libro/GetAll");
                 responseTask.Wait(); //esperar a que se resuelva la llamada al servicio
@@ -47,7 +47,7 @@ namespace PL.Controllers
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:61306/api/");
+                client.BaseAddress = new Uri("http://localhost:5207/api/");
 
                 var responseTask = client.GetAsync("Libro/LibroGetAllFecha");
                 responseTask.Wait(); //esperar a que se resuelva la llamada al servicio
@@ -87,7 +87,7 @@ namespace PL.Controllers
 
                 //using (var client = new HttpClient())
                 //{
-                //    client.BaseAddress = new Uri("http://localhost:61306/api/");
+                //    client.BaseAddress = new Uri("http://localhost:5207/api/");
 
                 //    var responseTask = client.GetAsync("Materia/GetById/" + idLibro);
                 //    responseTask.Wait();
@@ -148,7 +148,7 @@ namespace PL.Controllers
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:61306/api/");
+                    client.BaseAddress = new Uri("http://localhost:5207/api/");
 
                     //HTTP POST
                     var postTask = client.PostAsJsonAsync<ML.Libro>("Materia/Add", Libro);
@@ -182,7 +182,7 @@ namespace PL.Controllers
             {
                 //using (var client = new HttpClient())
                 //{
-                //    client.BaseAddress = new Uri("http://localhost:61306/api/");
+                //    client.BaseAddress = new Uri("http://localhost:5207/api/");
 
                 //    //HTTP POST
                 //    var postTask = client.PutAsJsonAsync<ML.Materia>("Materia/Update/" + Libro.IdMateria, Libro);
@@ -208,7 +208,7 @@ namespace PL.Controllers
         //    //int id = Aseguradora.IdAseguradora;
         //    using (var client = new HttpClient())
         //    {
-        //        client.BaseAddress = new Uri("http://localhost:61306/api");
+        //        client.BaseAddress = new Uri("http://localhost:5207/api");
 
         //        //HTTP POST
         //        var postTask = client.GetAsync("Materia/Delete/" + IdAseguradora);

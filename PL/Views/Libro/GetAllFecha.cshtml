@@ -1,6 +1,6 @@
-﻿﻿@model ML.Libro
+﻿@model ML.Libro
 @{
-    ViewBag.Title = "GetAll";
+    ViewBag.Title = "GetAllFecha";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
@@ -24,36 +24,22 @@
             @using (Html.BeginForm("GetAll", "Libro", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <div class="row">
+
                     <div class="col-md-3">
-                        @Html.LabelFor(model => model.Autor)
+                        @Html.LabelFor(model => model.Nombre)
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
-                            @Html.TextBoxFor(model => model.Autor, new { @class = "form-control", @id = "txtNombre" })
+                            @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre" })
                         </div>
                     </div>
                     <div class="col-md-3">
-                        @Html.LabelFor(model => model.Titulo)
+                        @Html.LabelFor(model => model.Publicacion)
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
-                            @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control", @id = "txtNombre" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        @Html.LabelFor(model => model.AñoPublicacion)
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
-                            @Html.TextBoxFor(model => model.FechaPublicacion, new { @class = "form-control", @id = "txtNombre" })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        @Html.LabelFor(model => model.Editorial)
-                        <div class="input-group">
-                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
-                            @Html.TextBoxFor(model => model.Editorial, new { @class = "form-control", @id = "txtNombre" })
+                            @Html.TextBoxFor(model => model.Publicacion, new { @class = "form-control", @id = "txtNombre" })
                         </div>
                     </div>
                 </div>
-
                 <br />
 
                 <div class="row">
@@ -98,9 +84,9 @@
                     {
                         <tr>
                             <td class="hidden">@libro.IdLibro</td>
-                            <td>@libro.Titulo</td>
+                            <td>@libro.Nombre</td>
                             <td>@libro.Autor</td>
-                            <td>@libro.FechaPublicacion</td>
+                            <td>@libro.Publicacion</td>
                             <td>@libro.Editorial</td>
                         </tr>
                     }
