@@ -49,7 +49,7 @@ namespace BL
                             libro.Descripcion = obj.Descripcion;
                             libro.Publicacion = obj.Publicacion;
 
-                            libro.Autor.IdAutor = obj.IdAutor.Value;
+                            libro.Autor.IdAutor = obj.IdAutor;
                             libro.Autor.Nombre = obj.Autor;
                             libro.Editorial.IdEditorial = obj.IdEditorial;
                             libro.Editorial.Nombre = obj.Editorial;
@@ -90,7 +90,7 @@ namespace BL
                             libro.Descripcion = obj.Descripcion;
                             libro.Publicacion = obj.Publicacion;
 
-                            libro.Autor.IdAutor = obj.IdAutor.Value;
+                            libro.Autor.IdAutor = obj.IdAutor;
                             libro.Autor.Nombre = obj.Autor;
                             libro.Editorial.IdEditorial = obj.IdEditorial;
                             libro.Editorial.Nombre = obj.Editorial;
