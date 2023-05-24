@@ -22,6 +22,7 @@ public partial class KranonGabrielaEEdgarCContext : DbContext
     public virtual DbSet<Libro> Libros { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=.; Database= Kranon_GabrielaE_Edgar_C; TrustServerCertificate=True; User ID=sa; Password=pass@word1;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,7 +42,9 @@ public partial class KranonGabrielaEEdgarCContext : DbContext
             entity.Property(e => e.Direccion)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.FechaNacimiento).HasColumnType("date");
+            entity.Property(e => e.FechaNacimiento)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.Nombre)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -53,7 +56,7 @@ public partial class KranonGabrielaEEdgarCContext : DbContext
 
             entity.ToTable("Editorial");
 
-            entity.Property(e => e.Nombre)
+            entity.Property(e => e.NombreEditorial)
                 .HasMaxLength(50)
                 .IsUnicode(false);
         });
@@ -65,13 +68,12 @@ public partial class KranonGabrielaEEdgarCContext : DbContext
             entity.ToTable("Libro");
 
             entity.Property(e => e.Descripcion)
-                .HasMaxLength(100)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
             entity.Property(e => e.Portada)
-                .HasMaxLength(50)
+                .HasMaxLength(100)
                 .IsUnicode(false);
-            entity.Property(e => e.Publicacion).HasColumnType("date");
-            entity.Property(e => e.Titulo)
+            entity.Property(e => e.Publicacion)
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
