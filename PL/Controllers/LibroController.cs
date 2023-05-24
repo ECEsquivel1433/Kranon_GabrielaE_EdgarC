@@ -9,36 +9,6 @@ namespace PL.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult GetAll()
-        {
-            ML.Libro libro = new ML.Libro();
-            ML.Result1 resultLibro = new ML.Result1();
-            resultLibro.Objects = new List<object>();
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:61306/api/");
-
-                var responseTask = client.GetAsync("Libro/GetAll");
-                responseTask.Wait(); //esperar a que se resuelva la llamada al servicio
-
-                var result = responseTask.Result;
-
-                if (result.IsSuccessStatusCode)
-                {
-                    var readTask = result.Content.ReadAsAsync<ML.Result1>();
-                    readTask.Wait();
-
-                    foreach (var resultItem in readTask.Result.Objects)
-                    {
-                        ML.Libro resultItemList = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Libro>(resultItem.ToString());
-                        resultLibro.Objects.Add(resultItemList);
-                    }
-                }
-                libro.Libros = resultLibro.Objects;
-            }
-            return View(libro);
-        }
         public ActionResult LibroGetAllFecha()
         {
             ML.Libro libro = new ML.Libro();
@@ -70,133 +40,112 @@ namespace PL.Controllers
             return View(libro);
         }
         [HttpGet]
-        public ActionResult Form(int? idLibro)
-        {
-            ML.Result1 result = new ML.Result1();
-            ML.Libro materia = new ML.Libro();
-            ML.Result1 resultLibro = new ML.Result1();
-            resultLibro.Objects = new List<object>();
-
-            if (idLibro == null)
-            {
-
-                return View(materia);
-            }
-
-            else
-            {
-
-                //using (var client = new HttpClient())
-                //{
-                //    client.BaseAddress = new Uri("http://localhost:61306/api/");
-
-                //    var responseTask = client.GetAsync("Materia/GetById/" + idLibro);
-                //    responseTask.Wait();
-                //    var resultAPI = responseTask.Result;
-                //    if (resultAPI.IsSuccessStatusCode)
-                //    {
-                //        var readTask = resultAPI.Content.ReadAsAsync<ML.Result>();
-                //        readTask.Wait();
-                //        ML.Materia resultItemList = new ML.Materia();
-                //        resultItemList = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Materia>(readTask.Result.Object.ToString());
-                //        materia = resultItemList;
-
-
-                //    }
-
-            }
-            return View(materia);
-            if (materia != null)
-            {
-                return View();
-
-            }
-            else
-            {
-                ViewBag.Message = "Ocurrio un error al hacer la consulta del alumno ";
-                return View("Modal");
-            }
-
-
-
-
-            if (result.Correct)
-            {
-
-
-                ML.Libro ase = (ML.Libro)result.Object;
-               // ase.Libros = resultLibros.Objects;
-                return View(ase);
-
-            }
-            else
-            {
-                ViewBag.Message = "Ocurrio un error al hacer la consulta de la aseguradora " + result.ErrorMessage;
-                return View("Modal");
-            }
-
-
-        }
-        [HttpPost]
-        public ActionResult Form(ML.Libro Libro)
+        public ActionResult GetAll()
         {
 
-            ML.Result1 result = new ML.Result1();
-            if (Libro.IdLibro == 0)
+            ML.Libro libro = new ML.Libro();
+
+            ML.Libro libroObjects = new ML.Libro();
+            libroObjects.Objects = new List<object>();
+            try
             {
                 using (var client = new HttpClient())
                 {
-                    client.BaseAddress = new Uri("http://localhost:61306/api/");
+                    string str = System.Configuration.ConfigurationManager.AppSettings["WebApi"];
+                    client.BaseAddress = new Uri(str);
 
-                    //HTTP POST
-                    var postTask = client.PostAsJsonAsync<ML.Libro>("Materia/Add", Libro);
-                    postTask.Wait();
+                    var responseTask = client.GetAsync("Libro/GetAll");
+                    responseTask.Wait();
 
-                    var resulLibro = postTask.Result;
+                    var resultServicio = responseTask.Result;
 
-                    if (resulLibro.IsSuccessStatusCode)
+                    if (resultServicio.IsSuccessStatusCode)
                     {
-                        ViewBag.Mensaje = "Se ha insertado la aseguradora";
-                        return PartialView("Modal");
+                        var readTask = resultServicio.Content.ReadAsAsync<ML.Libro>();
+                        readTask.Wait();
+
+                        foreach (var resultItem in readTask.Result.Objects)
+                        {
+                            ML.Libro resultItemList = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Libro>(resultItem.ToString());
+                            libroObjects.Objects.Add(resultItemList);
+                        }
                     }
-                    else
-                    {
-                        ViewBag.Mensaje = "No ha insertado la aseguradora";
-                        return PartialView("Modal");
-                    }
+                    libro.Libros = libroObjects.Objects;
                 }
-                return View("GetAll");
-                //result = BL.Aseguradora.Add(aseguradora);
-                //if (result.Correct)
-                //{
-                //    ViewBag.Mensaje = "Se ha insertado la aseguradora";
-                //}
-                //else
-                //{
-                //    ViewBag.Mensaje = "Ne ha insertado la aseguradora" + result.ErrorMessage;
-                //}
+
+            }
+            catch (Exception ex)
+            {
+                libroObjects.Correct = false;
+                libroObjects.ErrorMessage = ex.Message;
+                libroObjects.Ex = ex;
+
+            }
+
+            return View(libro);
+        }
+
+        [HttpPost]
+
+        public ActionResult GetAll(ML.Libro libro)
+        {
+            ML.Libro result = BL.Libro.GetAll(libro);
+
+            if (result.Correct)
+
+            {
+                libro.Libros = result.Objects;
+
+                return View(libro);
             }
             else
             {
-                //using (var client = new HttpClient())
-                //{
-                //    client.BaseAddress = new Uri("http://localhost:61306/api/");
-
-                //    //HTTP POST
-                //    var postTask = client.PutAsJsonAsync<ML.Materia>("Materia/Update/" + Libro.IdMateria, Libro);
-                //    postTask.Wait();
-
-                //    var resultAlumno = postTask.Result;
-                //    if (resultAlumno.IsSuccessStatusCode)
-                //    {
-                //        ViewBag.Mensaje = "Se ha actualizado el Aseguradora";
-                //        return PartialView("Modal");
-                //    }
-                //}
-                return PartialView("Modal");
+                return View(libro);
             }
+        }
 
-            return View();
+        [HttpGet]
+        public ActionResult Form(int? IdLibro)
+        {
+            ML.Libro libro = new ML.Libro();
+            ML.Libro resLibro = BL.Libro.GetAll(libro);
+
+
+            if (resLibro.Correct)
+            {
+                libro.Libros = resLibro.Objects;
+            }
+            if (IdLibro == null)
+            {
+                return View(libro);
+            }
+            else
+            {
+                return View(libro);
+            }
+        }
+        [HttpPost]
+        public ActionResult Form(ML.Libro libro)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(System.Configuration.ConfigurationManager.AppSettings["WebApi"]);
+
+                var postTask = client.PostAsJsonAsync<ML.Libro>("Libro/Add", libro);
+                postTask.Wait();
+
+                var resLibro = postTask.Result;
+                if (resLibro.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Se ha agregado el registro";
+                    return PartialView("Modal");
+                }
+                else
+                {
+                    ViewBag.Message = "No se ha agregado el registro";
+                    return PartialView("Modal");
+                }
+            }
         }
 
         //[HttpDelete]
