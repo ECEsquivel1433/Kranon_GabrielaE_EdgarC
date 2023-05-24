@@ -200,47 +200,42 @@ namespace PL.Controllers
 
             return View();
         }
-        //[HttpPost]//servicio web
-        //public ActionResult Delete(ML.Materia materia)
-        //{
-        //    ML.Result resultMaterias = new ML.Result();
-        //    int IdAseguradora = materia.IdMateria;
-        //    //int id = Aseguradora.IdAseguradora;
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri("http://localhost:61306/api");
+    //[HttpPost]//servicio web
+    public ActionResult Delete(ML.Libro libro)
+    {
+        ML.Result resultLibro = new ML.Result();
+        int IdLibro = libro.IdLibro;
+        //int id = Aseguradora.IdAseguradora;
+        using (var client = new HttpClient())
+        {
+            client.BaseAddress = new Uri("http://localhost:61306/api");
 
-        //        //HTTP POST
-        //        var postTask = client.GetAsync("Materia/Delete/" + IdAseguradora);
-        //        postTask.Wait();
+            //HTTP POST
+            var postTask = client.GetAsync("Materia/Delete/" + IdLibro);
+            postTask.Wait();
 
-        //        var resultDelete = postTask.Result;
-        //        if (resultDelete.IsSuccessStatusCode)
-        //        {
-        //            ViewBag.Message = "Se Borro correctamente el Aseguradora";
+            var resultDelete = postTask.Result;
+            if (resultDelete.IsSuccessStatusCode)
+            {
+                ViewBag.Message = "Se Borro correctamente el Aseguradora";
 
-        //            //ML.Aseguradora Aseguradora = new ML.Producto();
+                //ML.Aseguradora Aseguradora = new ML.Producto();
 
-        //            //resultListAseguradora= BL.Aseguradora.GetAll(Aseguradora);
-        //            //return RedirectToAction("Modal");
-        //            return PartialView("Modal");
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = "Nose Se Borro correctamente el Aseguradora";
+                //resultListAseguradora= BL.Aseguradora.GetAll(Aseguradora);
+                //return RedirectToAction("Modal");
+                return PartialView("Modal");
+            }
+            else
+            {
+                ViewBag.Message = "Nose Se Borro correctamente el Aseguradora";
 
-        //        }
-        //    }
+            }
+        }
 
-        //    //ML.Aseguradora Aseguradora = new ML.Aseguradora();
-
-        //    //resultListAseguradora = BL.Aseguradora.GetAll(Aseguradora);
-        //    //ViewBag.Message = "Nose Se Borro correctamente el Aseguradora";
-
-        //    return View("Modal");
-        //}
-
+        
     }
+
 }
+
     
 
