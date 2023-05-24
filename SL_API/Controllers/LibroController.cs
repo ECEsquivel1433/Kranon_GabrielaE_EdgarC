@@ -4,14 +4,14 @@ namespace SL_API.Controllers
 {
     public class LibroController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        
         [HttpGet]
         [Route("api/Libro/GetAll")]
-        public IActionResult GetAll([FromBody] ML.Libro libro)
+        public IActionResult GetAll()
         {
+            ML.Libro libro = new ML.Libro();
+            libro.Editorial = new ML.Editorial();
+            libro.Autor = new ML.Autor();
             ML.Result result = BL.Libro.GetAll(libro);
 
             if (result.Correct)

@@ -33,7 +33,7 @@ namespace BL
             {
                 using (DL.KranonGabrielaEEdgarCContext context = new DL.KranonGabrielaEEdgarCContext())
                 {
-                    var queryEF = context.Libros.FromSqlRaw($"UsuarioGetAll '{libro.Nombre}','{libro.Portada}','{libro.Publicacion}'").ToList();
+                    var queryEF = context.Libros.FromSqlRaw($"LibroGetAll '{libro.Autor.Nombre}','{libro.Portada}','{libro.Publicacion}', {libro.Editorial.Nombre}").ToList();
                     result.Objects = new List<object>();
                     if (queryEF != null)
                     {
