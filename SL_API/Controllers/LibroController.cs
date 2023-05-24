@@ -10,9 +10,9 @@ namespace SL_API.Controllers
         }
         [HttpGet]
         [Route("api/Libro/GetAll")]
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromBody] ML.Libro libro)
         {
-            ML.Result result = BL.Libro.GetAll();
+            ML.Result result = BL.Libro.GetAll(libro);
 
             if (result.Correct)
             {
@@ -25,9 +25,9 @@ namespace SL_API.Controllers
         }
         [HttpGet]
         [Route("api/Libro/LibroGetAllFecha")]
-        public IActionResult LibroGetAllFechal()
+        public IActionResult LibroGetAllFechal([FromBody] ML.Libro libro)
         {
-            ML.Result result = BL.Libro.LibroGetAllFecha();
+            ML.Result result = BL.Libro.LibroGetAllFecha(libro);
 
             if (result.Correct)
             {
