@@ -1,172 +1,116 @@
-﻿@model ML.Libro
+﻿﻿@model ML.Libro
+
 @{
-    ViewData["Title"] = "GetAll";
+    ViewBag.Title = "GetAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="container">
-    <section>
-
-        <h1 class="text-center">Lista de Usuario</h1>
-        <p>
-            En este modulo puedes visualizar los usuarios existentes,<br />
-            agregar, modificar y eliminarla usuarios
-        </p>
-    </section>
-    <section>
-
-        <div style="float:right;">
-            <div class="row">
-                @Html.ActionLink("Agregar", "Form", "Usuario", htmlAttributes: new { @class = "btn btn-success bi bi-person-plus-fill" })
-            </div>
+    <div class="row">
+        <div class="=col-md-12">
+            <h1 style="text-align:center; color:darkblue; font-family:Elephant">BIBLIOTECA</h1>
         </div>
-    </section>
-    <h1 class="text-center"></h1>
     </div>
 
-    @using (Html.BeginForm("GetAll", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="form-horizontal">
-            <div class="form-group">
-                <div class="col-md-3">
-                    @Html.LabelFor(model => model.IdLibro, new { @class = "visually-hidden" })
+    <div class="row">
+        <div class="col-md-12">
+            <h5 style="color:black; font-family:'Bodoni MT'">SELECCIONE AGREGAR PARA REGISTRAR UN LIBRO O SELECCIONE BUSCAR PARA UNA BÚSQUEDA RÁPIDA </h5>
+        </div>
+    </div>
 
-                    @Html.TextBoxFor(model => model.IdLibro, new { @class = "visually-hidden form-control" })
-                    @Html.ValidationMessageFor(model => model.IdLibro)
-                </div>
-            </div>
-            <div class="row">
+    <div class="row">
+        <div class="col-md-12">
 
-                <div class="col-md-3">
-                    @Html.LabelFor(model => model.Nombre)
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user-plus fa-fade" style="color:#b257a2"></i></span>
-                        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @id = "txtNombre", @onkeypress="SoloLetras(event, 'txtNombre', 'lblNombre')"})
-                        @Html.ValidationMessageFor(model => model.Nombre,null, new {@class="text-danger" })
-                        @Html.Label(null, "", new{@id="lblNombre"})
+
+            @using (Html.BeginForm("GetAll", "Libro", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Autor)
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
+                            @Html.TextBoxFor(model => model.Autor, new { @class = "form-control", @id = "txtNombre" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Titulo)
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
+                            @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control", @id = "txtNombre" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.AñoPublicacion)
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
+                            @Html.TextBoxFor(model => model.FechaPublicacion, new { @class = "form-control", @id = "txtNombre" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Editorial)
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user" style="color:blue"></i></span>
+                            @Html.TextBoxFor(model => model.Editorial, new { @class = "form-control", @id = "txtNombre" })
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    @Html.LabelFor(model => model.ApellidoPaterno)
-                    <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user-plus " style="color:#2c4ee7"></i></span>
-                        @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control", @id = "txtApellidoPaterno", @onkeypress="SoloLetras(event, 'txtApellidoPaterno', 'lblApellidoPaterno')" })
-                        @Html.ValidationMessageFor(model => model.ApellidoPaterno, null, new {@class="text-danger" } )
-                        @Html.Label(null, "", new{@id="lblApellioPaterno"})
+                <br/>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div>
+                            <input type="submit" value="Buscar" class="btn btn-info" />                          
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    @Html.LabelFor(model => model.ApellidoMaterno)
-                    <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-plus-fill" style="color:#e72c59"></i></span>
-                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control", @id = "txtApellidoMaterno", @onkeypress="SoloLetras(event, 'txtApellidoMaterno',  'lblApellidoMaterno')" })
-                    @Html.ValidationMessageFor(model => model.ApellidoMaterno , null, new {@class="text-danger" })
-                    @Html.Label(null, "", new{@id="lblApellioPaterno"})
+                    <div class="col-md-3">                       
+                        <div>
+                            @Html.ActionLink("Regresar a Lista", "GetAll", "Libro", htmlAttributes: new { @class = "btn btn-outline-info" })
+                        </div>
+                    </div>
 
                 </div>
-                </div>
-            </div>
-            
-            
+            <br />
 
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-3">
-            <input type="submit" value="Buscar" class="btn btn-info" />
-                @*@Html.ActionLink("Buscar", "GetAll", "Usuario", htmlAttributes: new { @class = "btn btn-info" })*@
-                   
-                </div>
-            </div>
-
-    }
-</div>
-    <hr />
-    <section>
-        @if (Model.Libros == null)
-        {
-            <div class="row">
-                <div class="alert alert-danger" role="alert">
-                    @ViewBag.Message
-                </div>
-            </div>
         }
-        else
-        {
-            <table class="table table-dark table-hover table-bordered table-responsive">
-                <thead>
-                    <tr>
-                        <td class="text-center" style=" font-weight:bold;">Editar</td>
-                        <td class="visually-hidden">IdLibro</td>
-                        <td class="text-center" style="font-weight:bold;">NombreCompleto</td>
-                        <td class="text-center" style="font-weight:bold;">Email</td>
-                        @*<td class="text-center" style="font-weight:bold;">Password</td>*@
-                        <td class="text-center" style="font-weight:bold;">FechaNacimiento</td>
-                        <td class="text-center" style="font-weight:bold;">Sexo</td>
-                        <td class="text-center" style="font-weight:bold;">Contactos </td>
-                        @*<td class="text-center" style="font-weight:bold;">Celular</td>*@
-                        <td class="text-center" style="font-weight:bold;">UserName</td>
-                        <td class="text-center" style="font-weight:bold;">Curp</td>
-                        <td class="text-center" style="font-weight:bold;">Imagen</td>
-                        <td class="text-center" style="font-weight:bold;">Direccion </td>
-                        <td class="text-center" style="font-weight:bold;">Estatus </td>
-                        <td class="text-center" style=" font-weight:bold;">Eliminar</td>
-                    </tr>
-                </thead>
-                <tbody>
+        </div>
+</div>
 
-                    @foreach (ML.Usuario usuario in Model.Usuarios)
-                    {
+
+
+
+
+
+        <div class="row">
+            <div class="col-md-1 ">
+                @Html.ActionLink("Agregar", "Form", "Libro", htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+            <br> <br />
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table table-bordered table-responsive">
+                    <thead class="thead-dark">
                         <tr>
-                            <td class="text-center"><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("Form", "Usuario", new { IdUsuario = usuario.IdUsuario })"></a></td>
-                            <td class="visually-hidden">@usuario.IdUsuario</td>
-                            <td>@usuario.Nombre @usuario.ApellidoPaterno @usuario.ApellidoMaterno  </td>
-                            <td>@usuario.Email </td>
-                            @*<td>@usuario.Password </td>*@
-                            <td>@usuario.FechaNacimiento </td>
-                            <td>@usuario.Sexo </td>
-                            <td>@usuario.Telefono @usuario.Celular </td>
-                            @*<td>@usuario.Celular</td>*@
-                            <td>@usuario.UserName </td>
-                            <td>@usuario.Curp </td>
-                            @*<td>@usuario.Rol.Nombre </td>*@
-                            @if (usuario.Imagen == null || usuario.Imagen == "")
-                            {
-                                <td class="text-center"><img src="/Images/" width="50px" height="50px" /></td>
-                            }
-                            else
-                            {
-                                <td> <img id="Img" src="data:image/*;base64,@usuario.Imagen" style="width:50px ; height:50px" /></td>
-
-                            }
-                            <td class="text-center">@usuario.Direccion.Colonia.Municipio.Estado.Pais.Nombre @usuario.Direccion.Colonia.Municipio.Estado.Nombre @usuario.Direccion.Colonia.Municipio.Nombre @usuario.Direccion.Colonia.Nombre  @usuario.Direccion.Colonia.CodigoPostal @usuario.Direccion.Calle @usuario.Direccion.NumeroInterior @usuario.Direccion.NumeroExterior  </td>
-                            
-                            @if (usuario.Estatus)
-                            {
-                                <td style="text-align: center; vertical-align: middle;">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked onchange="ChangeStatus(@usuario.IdUsuario, this)">
-                                    </div>
-                                </td>
-                            }
-                            else
-                            {
-                                <td style="text-align: center; vertical-align: middle;">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="ChangeStatus(@usuario.IdUsuario, this);">
-                                    </div>
-                                </td>
-                            }
-                            <td class="text-center"><a class="btn btn-danger bi bi-trash" href="@Url.Action("Delete", "Usuario", new { IdUsuario = usuario.IdUsuario})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                            <td class="hidden">IdLibro</td>
+                            <td>Titulo</td>
+                            <td>Autor </td>
+                            <td>Fecha Publicacion</td>
+                            <td>Editorial</td>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (ML.Libro libro in Model.Libros)
+                        {
+                            <tr>
+                                <td class="hidden">@libro.IdLibro</td>
+                                <td>@libro.Titulo</td>
+                                <td>@libro.Autor</td>
+                                <td>@libro.FechaPublicacion</td>
+                                <td>@libro.Editorial</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-        }
-
-
-
-    </section>
-</div>
+    </div>
