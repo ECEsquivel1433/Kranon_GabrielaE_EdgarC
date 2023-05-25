@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "c16b673d-bb8a-418a-bb04-b8cd19627643",
+		"name": "API methods",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23149892"
+	},
+	"item": [
+		{
+			"name": "LibroGetAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5207/api/Libro/GetAll"
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllByAutor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"portada\": \"\",\r\n\t\"publicacion\": \"\",\r\n\t\"autor\": {\r\n\t\t\"nombre\": \"Luis\"\r\n\t},\r\n\t\"editorial\": {\r\n\t\t\"nombre\": \"\"\r\n\t}\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5207/api/Libro/GetAllConsulta"
+			},
+			"response": []
+		},
+		{
+			"name": "GetByTitulo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"portada\": \"Tinta y Ceniza\",\r\n\t\"publicacion\": \"\",\r\n\t\"autor\": {\r\n\t\t\"nombre\": \"\"\r\n\t},\r\n\t\"editorial\": {\r\n\t\t\"nombre\": \"\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5207/api/Libro/GetAllConsulta"
+			},
+			"response": []
+		},
+		{
+			"name": "GetByAutorAndPublicacion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"portada\": \"\",\r\n\t\"publicacion\": \"2008\",\r\n\t\"autor\": {\r\n\t\t\"nombre\": \"Ricardo\"\r\n\t},\r\n\t\"editorial\": {\r\n\t\t\"nombre\": \"\"\r\n\t}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5207/api/Libro/GetAllConsulta"
+			},
+			"response": []
+		},
+		{
+			"name": "GetByEditorial",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"portada\": \"\",\r\n\t\"publicacion\": \"\",\r\n\t\"autor\": {\r\n\t\t\"nombre\": \"\"\r\n\t},\r\n\t\"editorial\": { \r\n\t\t\"nombre\": \"ReadFull\"\r\n\t}\r\n}"
+				},
+				"url": "http://localhost:5207/api/Libro/GetAllConsulta"
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteByAutor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "2",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5207/api/Libro/DeleteByAutor/ 2"
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteByEditorial",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "2",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5207/api/Libro/DeleteByEditorial/ 2"
+			},
+			"response": []
+		}
+	]
+}
