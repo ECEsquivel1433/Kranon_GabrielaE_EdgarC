@@ -24,6 +24,22 @@ namespace SL_API.Controllers
             }
         }
         [HttpGet]
+        [Route("api/Libro/GetAllConsulta")]
+        public IActionResult GetAllConsulta([FromBody] ML.Libro libro)
+        {
+            
+            ML.Result result = BL.Libro.GetAll(libro);
+
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
+        [HttpGet]
         [Route("api/Libro/LibroGetAllFecha")]
         public IActionResult LibroGetAllFechal([FromBody] ML.Libro libro)
         {
@@ -121,5 +137,22 @@ namespace SL_API.Controllers
                 return NotFound(result);
             }
         }
+        [HttpPost]
+        [Route("api/Libro/Delete")]
+        public IActionResult Delete([FromBody] int Idlibro)
+        {
+
+            ML.Result result = BL.Libro.Delete(Idlibro);
+
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return NotFound(result);
+            }
+        }
+
     }
 }

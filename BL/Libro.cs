@@ -192,5 +192,28 @@ namespace BL
             }
             return result;
         }
+
+        public static ML.Result Delete(int IdLibro)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.KranonGabrielaEEdgarCContext context = new DL.KranonGabrielaEEdgarCContext())
+                {
+                    int queryEF = context.Database.ExecuteSqlRaw($"LibroDelete {IdLibro}");
+                    if (queryEF > 0)
+                    {
+                        result.Correct = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrio un error al insertar el libro" + ex;
+            }
+            return result;
+        }
     }
 }

@@ -93,7 +93,7 @@
                             <p class="card-text" id="Editorial"> Editorial: @libro.Editorial.Nombre</p>
 
                             <a class="btn btn-info glyphicon glyphicon-edit" href="@Url.Action("LibroDescripcion", "Libro", new { IdLibro = libro.IdLibro })">Informacion</a>
-                            @*<a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete" ,"Libro", new { IdProducto = libro.IdLibro})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');">Eliminar</a>*@
+                            <a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete" ,"Libro", new { IdLibro = libro.IdLibro})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');">Eliminar</a>
                         </div>
                     </div>
                 </div>

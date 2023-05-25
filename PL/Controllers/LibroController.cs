@@ -273,7 +273,35 @@ namespace PL.Controllers
             }
             return View("Modal");
         }
+        public ActionResult Delete(int Idlibro)
+        {
 
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(configuration["WebApi"]);
+
+                //HTTP POST
+                var postTask = client.PostAsJsonAsync<int>("Libro/Delete", Idlibro);
+                postTask.Wait();
+
+                var resultDelete = postTask.Result;
+                if (resultDelete.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Se Borro correctamente el Libro";
+
+
+                }
+                else
+                {
+                    ViewBag.Message = "Nose Se Borro correctamente el Libro";
+
+                }
+            }
+
+
+            return View("Modal");
+        }
 
     }
 }
