@@ -12,7 +12,7 @@ namespace BL
             {
                 using (DL.KranonGabrielaEEdgarCContext context = new DL.KranonGabrielaEEdgarCContext())
                 {
-                    int queryEF = context.Database.ExecuteSqlRaw($"LibroAdd '{libro.Portada}','{libro.Descripcion}','{libro.Publicacion}',{libro.IdAutor},{libro.IdEditorial}");
+                    int queryEF = context.Database.ExecuteSqlRaw($"LibroAdd '{libro.Nombre}','{libro.Descripcion}','{libro.Publicacion}',{libro.Autor.IdAutor},{libro.Editorial.IdEditorial}");
                     if (queryEF > 0)
                     {
                         result.Correct = true;
@@ -149,6 +149,43 @@ namespace BL
             {
                 result.Correct = false;
                 result.ErrorMessage = "Ocurrio un error al insertar el usuario" + ex;
+            }
+            return result;
+        }
+        public static ML.Result GetById(int IdLibro)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.KranonGabrielaEEdgarCContext context = new DL.KranonGabrielaEEdgarCContext())
+                {
+                    var row = context.Libros.FromSqlRaw($"LibroGetById {IdLibro}").AsEnumerable().FirstOrDefault();
+                    if (row != null)
+                    {
+                        ML.Libro libro = new ML.Libro();
+                        libro.Autor = new ML.Autor();
+                        libro.Editorial = new ML.Editorial();
+
+                        libro.IdLibro = row.IdLibro;
+
+                        libro.Portada = row.Portada;
+                        libro.Descripcion = row.Descripcion;
+                        libro.Publicacion = row.Publicacion;
+
+                        libro.Autor.IdAutor = row.IdAutor;
+                        libro.Autor.Nombre = row.Autor;
+                        libro.Editorial.IdEditorial = row.IdEditorial;
+                        libro.Editorial.Nombre = row.Editorial;
+                        result.Object = libro;
+                    }
+                    result.Correct = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.Ex = ex;
+                result.ErrorMessage = ex.Message;
             }
             return result;
         }

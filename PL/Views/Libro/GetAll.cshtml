@@ -86,6 +86,7 @@
             <table class="table table-bordered table-responsive">
                 <thead class="thead-dark">
                     <tr>
+                        <td>Informacion</td>
                         <td class="visually-hidden">IdLibro</td>
                         <td>Titulo</td>
                         <td>Fecha Publicacion</td>
@@ -97,6 +98,7 @@
                     @foreach (ML.Libro libro in Model.Libros)
                     {
                         <tr>
+                            <td class="text-center"><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("LibroDescripcion", "Libro", new { IdLibro = libro.IdLibro })"></a></td>
                             <td class="visually-hidden">@libro.IdLibro</td>
                             <td>@libro.Portada</td>
                             <td>@libro.Publicacion</td>

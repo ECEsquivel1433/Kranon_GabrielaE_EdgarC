@@ -87,7 +87,6 @@ namespace PL.Controllers
             libro.Editorial.Editoriales = resultEditoriales.Objects;
             libro.Autor.Autores = resultAutores.Objects;
 
-
             //add
             if (idLibro == null)
             {
@@ -95,8 +94,6 @@ namespace PL.Controllers
             }
             else //BetById para Update
             {
-                //Se omite llamada a al y unboxing para WebAPI
-                //ML.Result result = BL.Libro.GetById(idLibro.Value);
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(configuration["WebApi"]);
@@ -105,7 +102,6 @@ namespace PL.Controllers
                     postTask.Wait();
 
                     var result = postTask.Result;
-
 
                     if (result.IsSuccessStatusCode)
                     {
@@ -130,8 +126,7 @@ namespace PL.Controllers
         [HttpPost]
         public ActionResult Form(ML.Libro libro)
         {
-            //if (ModelState.IsValid)//validar si se cumplieron todas las data annotations
-            // {
+
             IFormFile file = Request.Form.Files["inpImagen"];
 
             if (file != null)
@@ -154,11 +149,11 @@ namespace PL.Controllers
                     var libroresult = postTask.Result;
                     if (libroresult.IsSuccessStatusCode)
                     {
-                        ViewBag.Message = "Se agrego correctamente el usuario";
+                        ViewBag.Message = "Se agrego correctamente el libro";
                     }
                     else
                     {
-                        ViewBag.Message = "Ocurrio un error al agregar el usuario";
+                        ViewBag.Message = "Ocurrio un error al agregar el libro";
                     }
                 }
                 return PartialView("Modal");
@@ -176,11 +171,11 @@ namespace PL.Controllers
                     var libroresult = putTask.Result;
                     if (libroresult.IsSuccessStatusCode)
                     {
-                        ViewBag.Message = "Se actualizo correctamente el usuario";
+                        ViewBag.Message = "Se actualizo correctamente el libro";
                     }
                     else
                     {
-                        ViewBag.Message = "Ocurrio un error al actualizar el usuario";
+                        ViewBag.Message = "Ocurrio un error al actualizar el libro";
                     }
                 }
                 return PartialView("Modal");
@@ -197,6 +192,28 @@ namespace PL.Controllers
             fileStream.Read(bytes, 0, (int)fileStream.Length);
 
             return bytes;
+        }
+        public ActionResult LibroDescripcion(int IdLibro)
+        {
+            ML.Libro libro =new ML.Libro();
+            libro.Autor = new ML.Autor();
+            libro.Editorial = new ML.Editorial();
+            ML.Result result = BL.Libro.GetById(IdLibro);
+
+            if (result.Correct)
+            {
+                libro.Libros = result.Objects;
+            }
+            else
+            {
+                ViewBag.Message = "Ocurrio un error al consultar los libros";
+            }
+            ML.Result resultEditoriales = BL.Editorial.GetAll();
+            ML.Result resultAutores = BL.Autor.GetAll();
+
+            libro.Editorial.Editoriales = resultEditoriales.Objects;
+            libro.Autor.Autores = resultAutores.Objects;
+            return View(libro);
         }
 
     }
