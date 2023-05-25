@@ -98,7 +98,7 @@
                     @foreach (ML.Libro libro in Model.Libros)
                     {
                         <tr>
-                            <td class="text-center"><a class="btn btn-warning bi bi-pencil-square" href="@Url.Action("LibroDescripcion", "Libro", new { IdLibro = libro.IdLibro })"></a></td>
+                            <td class="text-center"><a class="btn btn-info bi bi-pencil-square" href="@Url.Action("LibroDescripcion", "Libro", new { IdLibro = libro.IdLibro })"></a></td>
                             <td class="visually-hidden">@libro.IdLibro</td>
                             <td>@libro.Portada</td>
                             <td>@libro.Publicacion</td>

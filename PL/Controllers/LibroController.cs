@@ -210,7 +210,7 @@ namespace PL.Controllers
             }
             ML.Result resultEditoriales = BL.Editorial.GetAll();
             ML.Result resultAutores = BL.Autor.GetAll();
-
+            libro = (ML.Libro)result.Object;
             libro.Editorial.Editoriales = resultEditoriales.Objects;
             libro.Autor.Autores = resultAutores.Objects;
             return View(libro);
