@@ -16,12 +16,12 @@ public partial class Libro
     public int IdAutor { get; set; }
 
     public int IdEditorial { get; set; }
-    
 
-    public virtual Autor? IdAutorNavigation { get; set; }
+    public string Imagen { get; set; } = default!;
+
+    public virtual  Autor? IdAutorNavigation { get; set; }
 
     public virtual Editorial? IdEditorialNavigation { get; set; }
-    
     public string Autor { get; set; } = default!;
     public string Editorial { get; set; } = default!;
 }

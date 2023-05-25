@@ -26,6 +26,8 @@ namespace BL
 
                             autor.IdAutor = obj.IdAutor;
                             autor.Nombre = obj.Nombre;
+                            autor.ApellidoPaterno = obj.ApellidoPaterno;
+                            autor.ApellidoMaterno = obj.ApellidoMaterno;
 
                             result.Objects.Add(autor);
                         }

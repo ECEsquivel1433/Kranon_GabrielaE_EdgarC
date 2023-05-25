@@ -29,7 +29,7 @@
                             @Html.ValidationMessageFor(model => model.IdLibro)
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <div class="col-md-6">
                             @Html.LabelFor(model => model.Nombre)
@@ -67,7 +67,24 @@
                             @Html.ValidationMessageFor(model => model.Editorial.IdEditorial)
                         </div>
                     </div>
-                    
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.LabelFor(model => model.Imagen)
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user-plus"></i></span>
+                                <input id="inpImagen" type='file' class="form-control" name="inpImagen" onchange="validateFile(this), visualizarImagen(this);  " />
+                            </div>
+                            @if (Model.Imagen == null || Model.Imagen == " ")
+                            {
+                                <img id="Img" src="/NewFolder/icon-256x256.png" style="width:250px ; height:250px" />
+                            }
+                            else
+                            {
+                                <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:250px ; height:250px" />
+                            }
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="col-md-3">
                             <input type="submit" value="Guardar" class="btn btn-success" />
@@ -79,3 +96,33 @@
         </div>
     </div>
 </div>
+<script>
+
+    function validateFile() {
+        var allowedExtension = ['jpeg', 'jpg', 'png'];
+        var fileExtension = document.getElementById('inpImagen').value.split('.').pop().toLowerCase();
+        var isValidFile = false;
+        for (var index in allowedExtension) {
+            if (fileExtension === allowedExtension[index]) {
+                isValidFile = true;
+                break;
+            }
+        }
+        if (!isValidFile) {
+            alert('Las extensiones permitidas son : *.' + allowedExtension.join(', *.'));
+            document.getElementById('inpImagen').value = ""
+        }
+        return isValidFile;
+    }
+</script>
+<script>
+    function visualizarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#Img').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

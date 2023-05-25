@@ -12,7 +12,7 @@ namespace BL
             {
                 using (DL.KranonGabrielaEEdgarCContext context = new DL.KranonGabrielaEEdgarCContext())
                 {
-                    int queryEF = context.Database.ExecuteSqlRaw($"LibroAdd '{libro.Nombre}','{libro.Descripcion}','{libro.Publicacion}',{libro.Autor.IdAutor},{libro.Editorial.IdEditorial}");
+                    int queryEF = context.Database.ExecuteSqlRaw($"LibroAdd '{libro.Nombre}','{libro.Descripcion}','{libro.Publicacion}',{libro.Autor.IdAutor},{libro.Editorial.IdEditorial},'{libro.Imagen}'");
                     if (queryEF > 0)
                     {
                         result.Correct = true;
@@ -48,6 +48,7 @@ namespace BL
                             libro.Portada = obj.Portada;
                             libro.Descripcion = obj.Descripcion;
                             libro.Publicacion = obj.Publicacion;
+                            libro.Imagen = obj.Imagen;
 
                             libro.Autor.IdAutor = obj.IdAutor;
                             libro.Autor.Nombre = obj.Autor;
@@ -89,6 +90,7 @@ namespace BL
                             libro.Portada = obj.Portada;
                             libro.Descripcion = obj.Descripcion;
                             libro.Publicacion = obj.Publicacion;
+                            libro.Imagen = obj.Imagen;
 
                             libro.Autor.IdAutor = obj.IdAutor;
                             libro.Autor.Nombre = obj.Autor;
@@ -171,6 +173,7 @@ namespace BL
                         libro.Portada = row.Portada;
                         libro.Descripcion = row.Descripcion;
                         libro.Publicacion = row.Publicacion;
+                        libro.Imagen = row.Imagen;
 
                         libro.Autor.IdAutor = row.IdAutor;
                         libro.Autor.Nombre = row.Autor;

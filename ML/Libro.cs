@@ -13,6 +13,7 @@ namespace ML
         public string Portada { get; set; } = default!;
         public string Descripcion { get; set; } = default!;
         public string Publicacion { get; set; } = default!;
+        public string Imagen { get; set; } = default!;
         public List<object> Libros { get; set; } = default!;
         public ML.Editorial Editorial { get; set; } = default!;
         public ML.Autor Autor { get; set; } = default!; 

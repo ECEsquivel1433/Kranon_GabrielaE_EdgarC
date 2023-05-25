@@ -53,12 +53,29 @@ namespace SL_API.Controllers
                 return NotFound(result);
             }
         }
-        [HttpDelete]
+        //[HttpDelete]
+        //[Route("api/Libro/DeleteByAutor")]
+        //public IActionResult DeleteAutor([FromBody] byte libro)
+        //{
+
+        //    ML.Result result = BL.Libro.DeleteByAutor(libro);
+
+        //    if (result.Correct)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    else
+        //    {
+        //        return NotFound(result);
+        //    }
+        //}
+
+        [HttpPost]
         [Route("api/Libro/DeleteByAutor")]
-        public IActionResult DeleteAutor([FromBody] byte libro)
+        public IActionResult DeleteAutor([FromBody] int IdAutor)
         {
 
-            ML.Result result = BL.Libro.DeleteByAutor(libro);
+            ML.Result result = BL.Libro.DeleteByAutor(IdAutor);
 
             if (result.Correct)
             {
@@ -69,12 +86,31 @@ namespace SL_API.Controllers
                 return NotFound(result);
             }
         }
-        [HttpDelete]
+
+
+        //[HttpDelete]
+        //[Route("api/Libro/DeleteByEditorial")]
+        //public IActionResult DeleteByEditorial([FromBody] byte libro)
+        //{
+
+        //    ML.Result result = BL.Libro.DeleteByEditorial(libro);
+
+        //    if (result.Correct)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    else
+        //    {
+        //        return NotFound(result);
+        //    }
+        //}
+
+        [HttpPost]
         [Route("api/Libro/DeleteByEditorial")]
-        public IActionResult DeleteByEditorial([FromBody] byte libro)
+        public IActionResult DeleteByEditorial([FromBody] int IdEditorial)
         {
 
-            ML.Result result = BL.Libro.DeleteByEditorial(libro);
+            ML.Result result = BL.Libro.DeleteByEditorial(IdEditorial);
 
             if (result.Correct)
             {

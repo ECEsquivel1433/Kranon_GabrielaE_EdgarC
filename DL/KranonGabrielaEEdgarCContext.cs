@@ -70,6 +70,7 @@ public partial class KranonGabrielaEEdgarCContext : DbContext
             entity.Property(e => e.Descripcion)
                 .HasMaxLength(1000)
                 .IsUnicode(false);
+            entity.Property(e => e.Imagen).IsUnicode(false);
             entity.Property(e => e.Portada)
                 .HasMaxLength(100)
                 .IsUnicode(false);

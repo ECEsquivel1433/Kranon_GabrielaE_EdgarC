@@ -131,7 +131,7 @@ namespace PL.Controllers
 
             if (file != null)
             {
-                libro.Portada = Convert.ToBase64String(ConvertToBytes(file));
+                libro.Imagen = Convert.ToBase64String(ConvertToBytes(file));
 
             }
 
@@ -215,6 +215,65 @@ namespace PL.Controllers
             libro.Autor.Autores = resultAutores.Objects;
             return View(libro);
         }
+
+        public ActionResult DeleteByAutor(int IdAutor)
+        {
+
+            //int id = Aseguradora.IdAseguradora;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(configuration["WebApi"]);
+
+                //HTTP POST
+                var postTask = client.GetAsync("Libro/DeleteByAutor/" + IdAutor);
+                postTask.Wait();
+
+                var resultDelete = postTask.Result;
+                if (resultDelete.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Se Borro correctamente el Libro";
+
+
+                }
+                else
+                {
+                    ViewBag.Message = "Nose Se Borro correctamente el Libro";
+
+                }
+            }
+
+
+            return View("Modal");
+        }
+
+        public ActionResult DeleteByEditorial(int IdEditorial)
+        {
+
+            //int id = Aseguradora.IdAseguradora;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(configuration["WebApi"]);
+
+                //HTTP POST
+                var postTask = client.GetAsync("Libro/DeleteByEditorial/" + IdEditorial);
+                postTask.Wait();
+
+                var resultDelete = postTask.Result;
+                if (resultDelete.IsSuccessStatusCode)
+                {
+                    ViewBag.Message = "Se Borro correctamente el Libro";
+
+
+                }
+                else
+                {
+                    ViewBag.Message = "Nose Se Borro correctamente el Libro";
+
+                }
+            }
+            return View("Modal");
+        }
+
 
     }
 }
